@@ -1,6 +1,3 @@
-
-var keyword = "";
-var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + keyword + "&api_key=1UDXeUjPXD7dVqzhJqMItp1MDQrx5uth&limit=10";
 var topics = ['v for vendetta', 'ice fails', 'snowboarding', 'cats', 'puppies', 'bobs burgers', 'disenchantment'];
 
 //function that displays the gif buttons
@@ -10,30 +7,34 @@ function displayGifButtons() {
         $("#gifButtonsView").append(gifButton);
     }
 }
-displayGifButtons();
 
 //function to add new button
 function addNewButton() {
+    event.preventDefault();
     $("#addGif").on("click", function () {
         var subject = $("#topicInput").val().trim();
         if (subject == "") {
             return false;//no blank buttons
         }
-        topic.push(subject);
+        topics.push(subject);
         displayGifButtons();
         return false;
     });
 }
-addNewButton();
 
 //function to remove last button
 function removeLastButton() {
     $("removeGif").on("click", function () {
-        topic.pop(subject);
+        topics.pop(subject);
         displayGifButtons();
         return false;
     });
 }
+
+function displayGifs() {
+    var keyword = $(this).attr("data-name");    
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + keyword + "&api_key=1UDXeUjPXD7dVqzhJqMItp1MDQrx5uth&limit=10";
+
 $.ajax({
     url: queryURL,
     method: "GET"
@@ -66,9 +67,24 @@ for (var i = 0; i < results.length; i++) {
     $("#gifsView").prepend(gifDiv);
 }
 });
+};
 
+// call functions
+displayGifButtons();
+addNewButton();
+removeLastButton();
 
-
-//list of already created gifs
 
 //event listeners
+
+$(document).on("click", ".subjects", displayGifs);
+$(document).on("click", ".image", function() {
+var state = $(this).attr('data-state');
+if (state == 'still') {
+$(this).attr('src', $(this).data('animate'));
+$(this).attr('data-state', 'animate');
+}else {
+$(this).attr('src', $(this).data('still'));
+$(this).attr('data-state', 'still');
+}
+});
