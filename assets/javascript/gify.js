@@ -6,15 +6,34 @@ var topics = ['v for vendetta', 'ice fails', 'snowboarding', 'cats', 'puppies', 
 //function that displays the gif buttons
 function displayGifButtons() {
     for (var i = 0; i < topics.length; i++) {
-        var gifButton = $("<button>").addClass("subjects","btn btn-primary").attr("data-name", topics[i]).text(topics[i]);
+        var gifButton = $("<button>").addClass("subjects", "btn btn-primary").attr("data-name", topics[i]).text(topics[i]);
         $("#gifButtonsView").append(gifButton);
     }
 }
 displayGifButtons();
+
 //function to add new button
+function addNewButton() {
+    $("#addGif").on("click", function () {
+        var subject = $("#topicInput").val().trim();
+        if (subject == "") {
+            return false;//no blank buttons
+        }
+        topic.push(subject);
+        displayGifButtons();
+        return false;
+    });
+}
+addNewButton();
 
 //function to remove last button
-
+function removeLastButton() {
+    $("removeGif").on("click", function () {
+        topic.pop(subject);
+        displayGifButtons();
+        return false;
+    });
+}
 // function that displays the gifs
 //show results
 
