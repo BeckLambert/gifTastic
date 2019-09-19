@@ -10,7 +10,6 @@ function displayGifButtons() {
 
 //function to add new button
 function addNewButton() {
-    event.preventDefault();
     $("#addGif").on("click", function () {
         var subject = $("#topicInput").val().trim();
         if (subject == "") {
