@@ -1,5 +1,5 @@
 
-var keyword = '';
+var keyword = "";
 var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + keyword + "&api_key=1UDXeUjPXD7dVqzhJqMItp1MDQrx5uth&limit=10";
 var topics = ['v for vendetta', 'ice fails', 'snowboarding', 'cats', 'puppies', 'bobs burgers', 'disenchantment'];
 
@@ -34,22 +34,40 @@ function removeLastButton() {
         return false;
     });
 }
-// function that displays the gifs
-//show results
+$.ajax({
+    url: queryURL,
+    method: "GET"
+}).then(function (response) {
+    var results = response.data;
+    //show results
+    console.log(response);
 
-//put gifs in a div
+    if (results == "") {
+        alert("There is not a giffy for this!");
+    }
 
-//pull rating of gif
+for (var i = 0; i < results.length; i++) {
+    //put gifs in a div
+    var gifDiv = $("<div1>");
+    //pull rating of gif
+    var gifRating = $("<p>").text("Rating " + results[i].rating);
+    gifDiv.append(gifRating);
+    //pull gif
+    var gifImage = $("<img>");
+    gifImage.attr("src", results[i].images.fixed_height_small_still.url);
+    //paused images
+    gifImage.attr("data-still", results[i].images.fixed_height_small_still.url);
+    //animated images
+    gifImage.attr("data-animate", results[i].images.fixed_height_small.url);
+    //how images come in, already paused
+    gifImage.attr("data-state", "still").addClass("image");
+    gifDiv.append(gifImage);
+    //add new div to existing divs
+    $("#gifsView").prepend(gifDiv);
+}
+});
 
-//pull gif
 
-//paused images
-
-//animated images
-
-//how images come in, already paused
-
-//add new div to existing divs
 
 //list of already created gifs
 
