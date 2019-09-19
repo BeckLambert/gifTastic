@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+ }
+
+body {
+    background: url("https://img.freepik.com/free-vector/spot-light-background_1284-4685.jpg?size=626&ext=jpg") center center fixed;
+    font-family: 'Kaushan Script', cursive;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 550px;
+ }
+
+.btn {
+    margin: 10px;
+    opacity: .8;
+    background-color: black;
+    border-color: royalblue;
+ }
+
+label {
+    color: darkblue;
+    font-size: 25px;
+    margin-right: 10px;
+ }
+ 
+p {
+    color: royalblue;
+    font-size: 16px;
+ }
+
+ #gifButtonsView{
+    display: inline-block;
+    float: left;
+    margin: 10px;
+ }
+
+.jumbotron {
+    color: royalblue;
+    margin-bottom: auto;
+    padding-bottom: 20px;
+    padding-top: 25px;
+    margin-right: 10%;
+    margin-left: 10%;
+    text-align: center;
+    opacity: .6;
+    background-color: #fff;
+    margin: 0 auto;
+ }
