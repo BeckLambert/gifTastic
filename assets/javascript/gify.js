@@ -4,27 +4,27 @@ var topics = ['v for vendetta', 'ice fails', 'snowboarding', 'cats', 'puppies', 
 function displayGifButtons() {
     for (var i = 0; i < topics.length; i++) {
         var gifButton = $("<button>").addClass("subjects", "btn btn-primary").attr("data-name", topics[i]).text(topics[i]);
-        $("#gifButtonsView").append(gifButton);
+    $("#gifButtonsView").append(gifButton);
     }
-}
 
-//function to add new button
-function addNewButton() {
-    $("#addGif").on("click", function () {
+    $("#addGif").on("click", function (event) {
+        event.preventDefault();
         var subject = $("#topicInput").val().trim();
+        console.log(subject)
         if (subject == "") {
             return false;//no blank buttons
         }
         topics.push(subject);
-        displayGifButtons();
-        return false;
+        var button = $("<button>").addClass('subjects').attr("data-name", subject).text(subject);
+        $("#gifButtonsView").append(button);
     });
 }
 
 //function to remove last button
 function removeLastButton() {
     $("removeGif").on("click", function () {
-        topics.pop(subject);
+        console.log('click');
+        subject.pop(topics);
         displayGifButtons();
         return false;
     });
@@ -32,8 +32,9 @@ function removeLastButton() {
 
 function displayGifs() {
     var keyword = $(this).attr("data-name");    
+    console.log("test", keyword);
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + keyword + "&api_key=1UDXeUjPXD7dVqzhJqMItp1MDQrx5uth&limit=10";
-
+    
 $.ajax({
     url: queryURL,
     method: "GET"
@@ -48,7 +49,7 @@ $.ajax({
 
 for (var i = 0; i < results.length; i++) {
     //put gifs in a div
-    var gifDiv = $("<div1>");
+    var gifDiv = $("<div>");
     //pull rating of gif
     var gifRating = $("<p>").text("Rating " + results[i].rating);
     gifDiv.append(gifRating);
@@ -70,7 +71,7 @@ for (var i = 0; i < results.length; i++) {
 
 // call functions
 displayGifButtons();
-addNewButton();
+// addNewButton();
 removeLastButton();
 
 
